@@ -1,0 +1,22 @@
+:host {
+    @apply sticky top-0 z-50 w-full left-0;
+}
+
+header {
+    @apply w-full top-0 shadow-lg sticky z-50 dark:bg-[var(--p-surface-900)] bg-[var(--p-surface-50)];
+    img {
+        @apply w-16 h-auto cursor-pointer rounded-xl;
+    }
+}
+.logo{
+    @apply flex gap-1 items-center cursor-pointer;
+    h1{
+        @apply font-extrabold font-serif text-4xl;
+    }
+}
+.header-container {
+    @apply w-full flex justify-between items-center md:px-36 md:py-2 px-6 py-1;
+}
+.icons{
+    @apply flex gap-2 items-center;
+}

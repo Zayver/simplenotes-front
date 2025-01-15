@@ -1,0 +1,46 @@
+@let note = this.note();
+<p-popover #op>
+    <div class="flex flex-col gap-2">
+        @if (note.archived) {
+        <p-button label="Unarchive" severity="success" (onClick)="this.setArchiveStatus(false)"
+            [disabled]="this.loading()"><ng-icon name="lucideArchiveRestore" /></p-button>
+
+        }@else {
+        <p-button label="Archive" (onClick)="this.setArchiveStatus(true)" [disabled]="this.loading()"><ng-icon
+                name="lucideArchiveRestore" /></p-button>
+        }
+
+        @if (!this.deleteConfirm()) {
+        <p-button label="Delete" severity="danger" (onClick)="this.deleteNote()"><ng-icon
+                name="lucideTrash" /></p-button>
+        }@else {
+        <p-button label="Confirm?" severity="danger" (onClick)="this.deleteNote()" [disabled]="this.loading()"><ng-icon
+                name="lucideCircleAlert" /></p-button>
+        }
+
+    </div>
+</p-popover>
+<div class="card" [routerLink]="['/editor']" [queryParams]="{noteUUID: note.uuid}"
+    [style]="{'background-color': this.getColor()}">
+
+    @if (note.archived) {
+    <div class="flex gap-2 items-center">
+        <ng-icon name="lucideArchive" />
+        <h1 class="font-bold">[ARCHIVED]</h1>
+    </div>
+    }
+    <div class="title">
+        <h1>{{note.title}}</h1>
+        <p-button severity="secondary" [rounded]="true" (onClick)="this.showPopover($event)"><ng-icon
+                name="lucideEllipsis" /></p-button>
+    </div>
+    <div [innerHTML]="this.getNoteContent()" class="content"></div>
+
+    @if (note.categories.length > 0) {
+        <div class="categories">
+            @for (category of note.categories; track $index) {
+                <p-chip [label]="category.name"/>
+            }
+        </div>
+    }
+</div>

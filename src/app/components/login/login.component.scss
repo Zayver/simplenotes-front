@@ -1,0 +1,19 @@
+.wrapper{
+    @apply flex w-full h-full items-center justify-center;
+}
+
+.login{
+    @apply flex flex-col items-center p-6 rounded-xl shadow-xl gap-8;
+
+    img{
+        @apply h-24;
+    }
+
+    h1{
+        @apply font-extrabold font-sans text-4xl;
+    }
+
+    form{
+        @apply flex flex-col gap-4 items-center;
+    }
+}

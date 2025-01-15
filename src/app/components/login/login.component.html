@@ -1,0 +1,12 @@
+<div class="wrapper">
+    <div class="login">
+        <h1>Login</h1>
+        <img src="papel.png" alt="IMG" srcset="">
+        <form [formGroup]="this.loginForm" (ngSubmit)="this.onSubmit()">
+
+            <input type="text" pInputText formControlName="username" placeholder="Username" />
+            <p-password formControlName="password" [feedback]="false" placeholder="Password" [toggleMask]="true"/>
+            <p-button type="submit" label="Login" severity="info" />
+        </form>
+    </div>
+</div>

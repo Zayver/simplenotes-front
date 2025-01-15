@@ -1,0 +1,15 @@
+
+
+:host(.dark) {
+    div{
+        @apply bg-surface-800 text-white;
+    }
+
+    button:hover{
+        @apply bg-zinc-600;
+    }
+    svg {
+        color: white;
+    }
+}
+  

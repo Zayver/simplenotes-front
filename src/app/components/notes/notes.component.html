@@ -1,0 +1,50 @@
+<p-dialog styleClass="md:w-[60rem] w-full" header="Edit Categories" [modal]="true" [(visible)]="categoryDialogVisible"
+    [draggable]="false">
+    <app-category />
+</p-dialog>
+
+<div class="wrapper">
+    <div class="title">
+        <div class="text">
+            <h1>Hi {{this.getUsername()}}</h1>
+            <h2>Your notes are there safe!!</h2>
+        </div>
+        <p-button severity="success" label="Create note" [routerLink]="['/editor']" />
+    </div>
+
+    <form [formGroup]="this.filterForm" class="filter">
+        <div class="category-filter">
+            @if (this.categories$ | async; as categories) {
+            <p-multiselect [options]="categories" optionLabel="name" optionValue="uuid" placeholder="Select categories" styleClass="w-full md:w-80" [showClear]="true" formControlName="categories">
+
+                <ng-template #footer>
+                    <div class="p-3 flex justify-center">
+                        <p-button label="Administrate" [outlined]="true" size="small"
+                            (onClick)="this.categoryDialogVisible = true" />
+                    </div>
+                </ng-template>
+            </p-multiselect>
+            }@else {
+            <p-skeleton width="5rem" styleClass="mb-2" borderRadius="16px" />
+            }
+        </div>
+
+        <div class="archived-filter">
+            <p-selectbutton [options]="this.archivedTypes" optionValue="value" optionLabel="name" formControlName="sortArchived"/>
+        </div>
+    </form>
+
+    <div class="notes">
+        @if (this.notes$ | async; as notes) {
+        @for (note of notes; track $index) {
+        <app-notecard [note]="note" [colorIndex]="$index%6" />
+        }@empty {
+            <h1 class="font-bold text-2xl text-center self-center col-span-full">You don't have any notes. Create one!</h1>
+        }
+        }@else {
+        <p-skeleton height="12rem" styleClass="w-full" />
+        <p-skeleton height="12rem" styleClass="w-full" />
+        <p-skeleton height="12rem" styleClass="w-full" />
+        }
+    </div>
+</div>

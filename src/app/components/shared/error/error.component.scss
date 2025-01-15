@@ -1,0 +1,7 @@
+.wrapper{
+    @apply w-full h-full flex flex-col gap-4 font-bold text-4xl items-center text-center justify-center;
+
+    h1{
+        @apply text-9xl;
+    }
+}

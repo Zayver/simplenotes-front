@@ -1,0 +1,46 @@
+<div class="wrapper">
+    <form [formGroup]="this.createNoteForm" (ngSubmit)="this.onSubmit()">
+        <div class="options">
+            <div class="tagmanager">
+                @if (this.categories$ | async; as categories) {
+                    <p-multiselect [options]="categories" optionLabel="name" optionValue="uuid" placeholder="Select categories"
+                        styleClass="w-full md:w-80" [showClear]="true" formControlName="categories"/>
+                }@else {
+                    <p-skeleton width="5rem" styleClass="mb-2" borderRadius="16px" />
+                }
+
+            </div>
+
+            @if (this.note !== undefined) {
+            <div class="note-control">
+                @if (note.archived) {
+                <p-button label="Unarchive" severity="success" (onClick)="this.setArchiveStatus(false)"
+                    [disabled]="this.loading()"><ng-icon name="lucideArchiveRestore" /></p-button>
+
+                }@else {
+                <p-button label="Archive" (onClick)="this.setArchiveStatus(true)" [disabled]="this.loading()"><ng-icon
+                        name="lucideArchiveRestore" /></p-button>
+                }
+
+                @if (!this.deleteConfirm()) {
+                <p-button label="Delete" severity="danger" (onClick)="this.deleteNote()"><ng-icon
+                        name="lucideTrash" /></p-button>
+                }@else {
+                <p-button label="Confirm?" severity="danger" (onClick)="this.deleteNote()"
+                    [disabled]="this.loading()"><ng-icon name="lucideCircleAlert" /></p-button>
+                }
+            </div>
+            }
+        </div>
+        <input type="text" pInputText placeholder="Title" formControlName="title">
+        <app-mdeditor [control]="this.getNoteControl()" />
+
+        @if (this.note === undefined) {
+        <p-button class="self-center" type="submit" label="Create Note" severity="success"
+            [disabled]="this.createNoteForm.invalid|| this.createNoteForm.pristine" />
+        }@else {
+        <p-button class="self-center" type="submit" label="Edit note" severity="warn"
+            [disabled]="this.createNoteForm.invalid" />
+        }
+    </form>
+</div>

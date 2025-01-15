@@ -1,0 +1,11 @@
+
+.footer-container{
+    @apply w-full pt-3 pb-6 px-6 flex flex-col items-center text-center gap-1 border-t-2;
+    h1{
+        @apply font-bold font-sans text-xl;
+    }
+
+    img{
+        @apply p-1 rounded-full dark:bg-white;
+    }
+}
